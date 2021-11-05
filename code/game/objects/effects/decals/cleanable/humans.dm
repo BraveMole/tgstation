@@ -47,7 +47,7 @@
 		name = dryname
 		desc = drydesc
 		bloodiness = 0
-		color =  COLOR_GRAY //not all blood splatters have their own sprites... It still looks pretty nice
+		color = COLOR_GRAY //not all blood splatters have their own sprites... It still looks pretty nice
 		STOP_PROCESSING(SSobj, src)
 		return TRUE
 
@@ -279,9 +279,9 @@
 			// god help me
 			if(species == "unknown")
 				. += "Some <B>feet</B>."
-			else if(species == "monkey")
-				. += "[icon2html('icons/mob/monkey.dmi', user, "monkey1")] Some <B>monkey feet</B>."
-			else if(species == "human")
+			else if(species == SPECIES_MONKEY)
+				. += "[icon2html('icons/mob/human.dmi', user, "monkey")] Some <B>monkey feet</B>."
+			else if(species == SPECIES_HUMAN)
 				. += "[icon2html('icons/mob/human_parts.dmi', user, "default_human_l_leg")] Some <B>human feet</B>."
 			else
 				. += "[icon2html('icons/mob/human_parts.dmi', user, "[species]_l_leg")] Some <B>[species] feet</B>."

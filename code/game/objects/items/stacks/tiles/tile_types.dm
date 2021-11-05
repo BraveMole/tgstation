@@ -12,6 +12,7 @@
 	throw_range = 7
 	max_amount = 60
 	novariants = TRUE
+	material_flags = MATERIAL_EFFECTS
 	/// What type of turf does this tile produce.
 	var/turf_type = null
 	/// What dir will the turf have?
@@ -37,7 +38,7 @@
 /obj/item/stack/tile/examine(mob/user)
 	. = ..()
 	if(tile_reskin_types || tile_rotate_dirs)
-		. += "<span class='notice'>Use while in your hand to change what type of [src] you want.</span>"
+		. += span_notice("Use while in your hand to change what type of [src] you want.")
 	if(throwforce && !is_cyborg) //do not want to divide by zero or show the message to borgs who can't throw
 		var/verb
 		switch(CEILING(MAX_LIVING_HEALTH / throwforce, 1)) //throws to crit a human
@@ -53,7 +54,7 @@
 				verb = "mediocre"
 		if(!verb)
 			return
-		. += "<span class='notice'>Those could work as a [verb] throwing weapon.</span>"
+		. += span_notice("Those could work as a [verb] throwing weapon.")
 
 
 /obj/item/stack/tile/proc/place_tile(turf/open/T)
@@ -334,7 +335,7 @@
 	var/mutable_appearance/neon_overlay = mutable_appearance(icon_file, neon_inhand_icon_state)
 	neon_overlay.color = neon_color
 	. += neon_overlay
-	. += emissive_appearance(icon_file, neon_inhand_icon_state, alpha = emissive_alpha, appearance_flags = KEEP_APART)
+	. += emissive_appearance(icon_file, neon_inhand_icon_state, alpha = emissive_alpha)
 
 /obj/item/stack/tile/carpet/neon/simple
 	name = "simple neon carpet"
@@ -894,33 +895,6 @@
 /obj/item/stack/tile/carpet/neon/simple/pink/nodots/sixty
 	amount = 60
 
-/obj/item/stack/tile/fake_error
-	name = "misproduced carpet"
-	singular_name = "misproduced carpet tile"
-	desc = "A piece of neon carpet produced under a software error."
-	icon_state = "tile-error"
-	inhand_icon_state = "tile-error"
-	turf_type = /turf/open/floor/fake_error
-	merge_type = /obj/item/stack/tile/fake_error
-	resistance_flags = FLAMMABLE
-
-/obj/item/stack/tile/fake_error/update_overlays()
-	. = ..()
-	. += emissive_appearance(icon, icon_state, alpha = alpha)
-
-/obj/item/stack/tile/fake_error/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
-	. = ..()
-	. += emissive_appearance(standing.icon, standing.icon_state, alpha = standing.alpha, appearance_flags = KEEP_APART)
-
-/obj/item/stack/tile/fake_error/ten
-	amount = 10
-
-/obj/item/stack/tile/fake_error/thirty
-	amount = 30
-
-/obj/item/stack/tile/fake_error/sixty
-	amount = 60
-
 /obj/item/stack/tile/fakespace
 	name = "astral carpet"
 	singular_name = "astral carpet tile"
@@ -1043,7 +1017,7 @@
 	throwforce = 10
 	icon_state = "material_tile"
 	turf_type = /turf/open/floor/material
-	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
+	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 	merge_type = /obj/item/stack/tile/material
 
 /obj/item/stack/tile/material/place_tile(turf/open/T)
@@ -1125,7 +1099,7 @@
 
 /obj/item/stack/tile/emissive_test/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
 	. = ..()
-	. += emissive_appearance(standing.icon, standing.icon_state, alpha = standing.alpha, appearance_flags = KEEP_APART)
+	. += emissive_appearance(standing.icon, standing.icon_state, alpha = standing.alpha)
 
 /obj/item/stack/tile/emissive_test/sixty
 	amount = 60
@@ -1137,4 +1111,16 @@
 	merge_type = /obj/item/stack/tile/emissive_test/white
 
 /obj/item/stack/tile/emissive_test/white/sixty
+	amount = 60
+
+/obj/item/stack/tile/catwalk_tile
+	name = "catwalk floor"
+	singular_name = "catwalk floor tile"
+	desc = "Catwalk floor to be able see things underneath"
+	icon_state = "catwalk_floor"
+	inhand_icon_state = "tile-catwalk"
+	turf_type = /turf/open/floor/catwalk_floor
+	merge_type = /obj/item/stack/tile/catwalk_tile
+
+/obj/item/stack/tile/catwalk_tile/sixty
 	amount = 60

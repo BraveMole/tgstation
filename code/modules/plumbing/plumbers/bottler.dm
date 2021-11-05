@@ -23,11 +23,11 @@
 
 /obj/machinery/plumbing/bottler/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>A small screen indicates that it will fill for [wanted_amount]u.</span>"
+	. += span_notice("A small screen indicates that it will fill for [wanted_amount]u.")
 
 /obj/machinery/plumbing/bottler/can_be_rotated(mob/user, rotation_type)
 	if(anchored)
-		to_chat(user, "<span class='warning'>It is fastened to the floor!</span>")
+		to_chat(user, span_warning("It is fastened to the floor!"))
 		return FALSE
 	return TRUE
 
@@ -38,25 +38,25 @@
 		if(NORTH)
 			goodspot = get_step(get_turf(src), NORTH)
 			inputspot = get_step(get_turf(src), SOUTH)
-			badspot  = get_step(get_turf(src), EAST)
+			badspot = get_step(get_turf(src), EAST)
 		if(SOUTH)
 			goodspot = get_step(get_turf(src), SOUTH)
 			inputspot = get_step(get_turf(src), NORTH)
-			badspot  = get_step(get_turf(src), WEST)
+			badspot = get_step(get_turf(src), WEST)
 		if(WEST)
 			goodspot = get_step(get_turf(src), WEST)
 			inputspot = get_step(get_turf(src), EAST)
-			badspot  = get_step(get_turf(src), NORTH)
+			badspot = get_step(get_turf(src), NORTH)
 		if(EAST)
 			goodspot = get_step(get_turf(src), EAST)
 			inputspot = get_step(get_turf(src), WEST)
-			badspot  = get_step(get_turf(src), SOUTH)
+			badspot = get_step(get_turf(src), SOUTH)
 
 ///changing input ammount with a window
 /obj/machinery/plumbing/bottler/interact(mob/user)
 	. = ..()
 	wanted_amount = clamp(round(input(user,"maximum is 100u","set ammount to fill with") as num|null, 1), 1, 100)
-	to_chat(user, "<span class='notice'> The [src] will now fill for [wanted_amount]u.</span>")
+	to_chat(user, span_notice(" The [src] will now fill for [wanted_amount]u."))
 
 /obj/machinery/plumbing/bottler/process()
 	if(machine_stat & NOPOWER)

@@ -12,7 +12,7 @@
 	resistance_flags = ACID_PROOF
 	obj_flags = UNIQUE_RENAME
 	drop_sound = 'sound/items/handling/drinkglass_drop.ogg'
-	pickup_sound =  'sound/items/handling/drinkglass_pickup.ogg'
+	pickup_sound = 'sound/items/handling/drinkglass_pickup.ogg'
 	custom_price = PAYCHECK_PRISONER
 
 /obj/item/reagent_containers/food/drinks/drinkingglass/on_reagent_change(datum/reagents/holder, ...)
@@ -122,10 +122,11 @@
 		var/obj/item/food/egg/E = I
 		if(reagents)
 			if(reagents.total_volume >= reagents.maximum_volume)
-				to_chat(user, "<span class='notice'>[src] is full.</span>")
+				to_chat(user, span_notice("[src] is full."))
 			else
-				to_chat(user, "<span class='notice'>You break [E] in [src].</span>")
-				reagents.add_reagent(/datum/reagent/consumable/eggyolk, 5)
+				to_chat(user, span_notice("You break [E] in [src]."))
+				reagents.add_reagent(/datum/reagent/consumable/eggyolk, 2)
+				reagents.add_reagent(/datum/reagent/consumable/eggwhite, 4)
 				qdel(E)
 			return
 	else

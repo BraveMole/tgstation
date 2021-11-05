@@ -36,7 +36,7 @@
 
 /obj/item/food/grown/potato/attackby(obj/item/W, mob/user, params)
 	if(W.get_sharpness())
-		to_chat(user, "<span class='notice'>You cut the potato into wedges with [W].</span>")
+		to_chat(user, span_notice("You cut the potato into wedges with [W]."))
 		var/obj/item/food/grown/potato/wedges/Wedges = new /obj/item/food/grown/potato/wedges
 		remove_item_from_storage(user)
 		qdel(src)
@@ -53,7 +53,7 @@
 	species = "sweetpotato"
 	plantname = "Sweet Potato Plants"
 	product = /obj/item/food/grown/potato/sweet
-	mutatelist = list()
+	mutatelist = null
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.1, /datum/reagent/consumable/sugar = 0.1, /datum/reagent/consumable/nutriment = 0.1)
 
 /obj/item/food/grown/potato/sweet

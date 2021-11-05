@@ -32,6 +32,7 @@
 					CAT_LIZARD,
 					CAT_ICE,
 					CAT_MEAT,
+					CAT_SEAFOOD,
 					CAT_MISCFOOD,
 					CAT_PASTRY,
 					CAT_PIE,
@@ -116,7 +117,7 @@
 		return
 
 	for(var/atom/movable/AM in range(radius_range, a))
-		if((AM.flags_1 & HOLOGRAM_1)  || (blacklist && (AM.type in blacklist)))
+		if((AM.flags_1 & HOLOGRAM_1) || (blacklist && (AM.type in blacklist)))
 			continue
 		. += AM
 
@@ -443,10 +444,10 @@
 					user.put_in_hands(result)
 				else
 					result.forceMove(user.drop_location())
-				to_chat(user, "<span class='notice'>[TR.name] constructed.</span>")
+				to_chat(user, span_notice("[TR.name] constructed."))
 				TR.on_craft_completion(user, result)
 			else
-				to_chat(user, "<span class='warning'>Construction failed[result]</span>")
+				to_chat(user, span_warning("Construction failed[result]"))
 			busy = FALSE
 		if("toggle_recipes")
 			display_craftable_only = !display_craftable_only
